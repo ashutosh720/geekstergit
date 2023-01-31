@@ -1,0 +1,25 @@
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        //System.out.println("Hello world!");
+
+        String url="https://api.weatherbit.io/v2.0/current/airquality?lat=35.7721&lon=-78.63861&key=956579df74374c9ca718f68f54525f50";
+
+        //Building a request
+        HttpRequest request=HttpRequest.newBuilder().GET().uri(URI.create(url)).build();
+
+        //Getting the HttpClient object
+        HttpClient httpClient=HttpClient.newBuilder().build();
+
+        HttpResponse<String> httpResponse = httpClient.send(request,HttpResponse.BodyHandlers.ofString());
+
+        //statusCode and body
+        System.out.println(httpResponse.statusCode());
+        System.out.println(httpResponse.body());
+    }
+}
